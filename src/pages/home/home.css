@@ -51,6 +51,7 @@
 }
 
 .home-button {
+  font-family: 'Poppins', arial;
   background-color: #2d401b; /* Cor verde escura do botão */
   color: white;
   border: none;

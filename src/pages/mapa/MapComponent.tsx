@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Map, NavigationControl, Marker } from '@maptiler/sdk';
+import { Map, NavigationControl, GeolocateControl, Marker } from '@maptiler/sdk';
 import '@maptiler/sdk/dist/maptiler-sdk.css';
 
 const center = {
@@ -21,10 +21,20 @@ export function MapComponent() {
       style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}`,
       center: [center.lng, center.lat],
       zoom: 12,
+      navigationControl: false, // Desabilita os controles padrão de navegação
+      geolocateControl: false,  // Desabilita o controle de geolocalização padrão
     });
 
-    // Adiciona controles de navegação
-    map.current.addControl(new NavigationControl());
+    // Adiciona controles de navegação no canto inferior esquerdo
+    map.current.addControl(new NavigationControl(), 'bottom-left');
+    
+    // Adiciona controle de geolocalização no canto inferior esquerdo
+    map.current.addControl(new GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    }), 'bottom-left');
 
     // Adiciona um marcador
     new Marker({ color: '#FF0000' })
@@ -42,9 +52,7 @@ export function MapComponent() {
       ref={mapContainer} 
       style={{
         width: '100%',
-        height: '70vh',
-        borderRadius: '8px',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+        height: '100%',
       }}
     />
   );

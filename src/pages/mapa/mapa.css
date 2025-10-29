@@ -1,33 +1,28 @@
 .mapa-container {
-  padding: 2rem 5%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.mapa-container h1 {
-  color: #333;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-size: 2rem;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: calc(100vh - 80px);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f0f0f0; /* Cor temporária para debug */
 }
 
 .mapa-wrapper {
   width: 100%;
-  margin: 0 auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  background: #fff;
-  padding: 1rem;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* Estilos responsivos */
-@media (max-width: 768px) {
-  .mapa-container {
-    padding: 1rem;
-  }
-  
-  .mapa-container h1 {
-    font-size: 1.5rem;
-  }
+.map-container, 
+.mapa-wrapper > div {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }

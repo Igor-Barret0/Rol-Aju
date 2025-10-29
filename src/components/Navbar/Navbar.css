@@ -1,5 +1,6 @@
 /* Navbar container */
 .navbar {
+  font-family: 'Poppins', sans-serif;
   background-color: transparent;
   position: fixed;
   width: 100%;
@@ -10,23 +11,69 @@
 }
 
 .navbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.navbar.navbar-internal {
+  background-color: #fff;
 }
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2%;
-  max-width: 1800px;
-  margin: 0 auto;
   width: 100%;
-  box-sizing: border-box;
+  padding: 0 3rem;
+  height: 100%;
+  position: relative; 
 }
 
-/* Navigation Sections */
-.nav-left {
+.logo-placeholder {
+  display: flex; /* Adicionado para alinhar a imagem */
+  align-items: center; /* Adicionado para alinhar a imagem */
+  z-index: 10;
+  font-size: 1.8rem; /* Ajustado para a imagem */
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  flex-shrink: 0; /* Impede que a logo encolha */
+  height: 50px; /* Ajuste a altura da sua logo conforme necessário */
+  width: auto; /* Mantém a proporção da imagem */
+}
+
+.logo-placeholder img {
+  height: 50px; /* Ajuste a altura da sua logo conforme necessário */
+  width: auto; /* Mantém a proporção da imagem */
+}
+
+/* Novos containers para os grupos de links */
+.nav-group {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+}
+
+.nav-group-left {
+  right: 50%; /* Começa no centro */
+  padding-right: 50px; /* Empurra 110px para a esquerda do centro */
+}
+
+.nav-group-right {
+  left: 50%; /* Começa no centro */
+  padding-left: 50px; /* Empurra 110px para a direita do centro */
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 3rem; /* Espaçamento lógico entre os itens */
+}
+
+.nav-item {
   display: flex;
   align-items: center;
 }
@@ -34,44 +81,29 @@
 .nav-link {
   display: flex;
   align-items: center;
-  color: #333;
+  gap: 0.5rem;
+  color: #fff; /* Cor padrão para a home */
   text-decoration: none;
-  font-weight: 600;
-  padding: 8px 15px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  position: relative;
+  font-weight: 500;
+  font-size: 20px; /* <-- Adicione esta linha para definir o tamanho da fonte */
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
   white-space: nowrap;
-  height: 100%;
-  width: auto;
-  justify-content: flex-start;
 }
 
-.nav-list {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 2rem;
-  align-items: center;
+/* Força todos os links a serem escuros na navbar interna */
+.navbar.navbar-internal .nav-link {
+  color: #333;
 }
 
-/* Right-aligned section */
-.nav-right {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  gap: 1.5rem;
-  padding-right: 2rem;
+/* Classe específica para os links escuros (continua útil para a home) */
+.nav-link-dark {
+  color: #000;
 }
 
-.nav-item {
-  margin: 0;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  height: 100%;
-  padding: 0 5px;
+.navbar.scrolled .nav-link {
+  color: #000; /* Todos os links ficam pretos com o scroll */
 }
 
 /* Estilos do Dropdown */
@@ -83,37 +115,62 @@
 }
 
 .dropdown-content {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%);
-  background-color: #f8f9fa;
-  min-width: 200px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 1001;
-  border-radius: 8px;
-  padding: 4px 0;
-  font-size: 0.8em;
-  margin-top: 5px;
-  overflow: hidden;
+  transform: translateX(-50%) scale(0.95);
+  background-color: #4A5C3A;
+  display: flex;
+  padding: 8px 8px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-column {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.dropdown-column:first-child {
+  /* remova ou comente a linha abaixo */
+  /* border-right: 1px solid rgba(255, 255, 255, 0.2); */
+  padding-right: 1rem;
 }
 
 .dropdown:hover .dropdown-content {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1); /* Ajusta a animação */
 }
 
 .dropdown-item {
-  color: #333;
-  padding: 4px 12px;
+  color: white; /* Cor do texto */
+  padding: 12px 12px;
   text-decoration: none;
   display: block;
-  transition: background-color 0.15s ease;
-  line-height: 1.2;
+  text-align: left;
+  font-size: 15px;
+}
+
+/* Remove a borda do último item */
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+/* Estilo para o item "Ver Tudo" */
+.dropdown-item.bold-item {
+  font-weight: bold;
 }
 
 .dropdown-item:hover {
-  background-color: #e9ecef;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white; /* Garante que o texto permaneça branco no hover */
 }
 
 .dropdown-divider {
@@ -132,74 +189,6 @@
   margin-top: 2px;
 }
 
-/* Links do lado esquerdo (Mapa e Categorias) */
-.navbar .nav-left .nav-list .nav-item .nav-link {
-  font-size: 18px !important;
-  color: #fff !important; /* Branco na home */
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  white-space: nowrap;
-}
-
-/* Links do lado direito (Sobre e Contato) */
-.navbar .nav-right {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: auto;
-  padding-right: 3rem;
-}
-
-.navbar .nav-right .nav-list {
-  display: flex;
-  gap: 0.2rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.navbar .nav-right .nav-item .nav-link {
-  font-size: 18px !important;
-  color: #000 !important; /* Preto na home */
-  font-weight: 700;
-  white-space: nowrap;
-  letter-spacing: 0.4px;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 8px 12px;
-}
-
-/* Na página Sobre Aracaju, todos os links em preto */
-body.sobre-page .navbar .nav-list .nav-item .nav-link,
-body.sobre-page .navbar .nav-right .nav-item .nav-link {
-  color: #000 !important;
-}
-
-/* Garantindo que o tamanho da fonte se mantenha ao rolar */
-.navbar.scrolled .nav-list .nav-item .nav-link,
-.navbar.scrolled .nav-right .nav-item .nav-link {
-  font-size: 18px !important;
-}
-
-/* Ensure right side links stay black */
-.nav-right .nav-link,
-.navbar.scrolled .nav-right .nav-link {
-  color: #000000;
-}
-
-/* Hover effect for right side links */
-.nav-right .nav-link:hover {
-  color: #4a6cf7;
-}
-
-/* Add separator between right links and search */
 .search-bar {
   position: relative;
   margin-left: 2rem;
@@ -207,8 +196,7 @@ body.sobre-page .navbar .nav-right .nav-item .nav-link {
   align-items: center;
   background: #ffffff;
   border-radius: 24px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
+  border: 1px solid #999999; 
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   height: 40px; /* Altura reduzida para melhor proporção */
@@ -229,7 +217,6 @@ body.sobre-page .navbar .nav-right .nav-item .nav-link {
   font-size: 0.9rem;
   color: #1a202c;
   outline: none;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   margin-right: -8px; /* Ajuste fino para o alinhamento */
 }
 
@@ -240,18 +227,18 @@ body.sobre-page .navbar .nav-right .nav-item .nav-link {
 }
 
 .search-button {
-  background: #4a6cf7;
+  background: transparent; /* Mudado de #4a6cf7 para transparent */
   border: none;
-  color: white;
-  height: 36px; /* Altura fixa para o botão */
+  color: #000000; /* Cor do ícone agora é azul */
+  height: 36px;
   padding: 0 1.25rem;
-  margin: 2px; /* Margem para o efeito de elevação */
+  margin: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 20px; /* Bordas arredondadas */
+  border-radius: 20px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -260,7 +247,8 @@ body.sobre-page .navbar .nav-right .nav-item .nav-link {
 }
 
 .search-button:hover {
-  background: #3a5bd9;
+  background: rgba(74, 108, 247, 0.1); /* Fundo azul claro no hover */
+  color: #3a5bd9;
   transform: scale(1.05);
 }
 
