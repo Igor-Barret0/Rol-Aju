@@ -5,8 +5,10 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Importe suas páginas
-import { HomePage } from './pages/home/home.tsx';
-import { AboutPage } from './pages/sobre/sobre.tsx';
+import { HomePage } from './pages/home/home';
+import { AboutPage } from './pages/sobre/sobre';
+import { MapaPage } from './pages/mapa/mapa';
+import Contato from './pages/contato/contato';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: "sobre",
         element: <AboutPage />,
+      },
+      {
+        path: "mapa",
+        element: <MapaPage />,
+      },
+      {
+        path: "contato",
+        element: <Contato />,
       },
     ],
   },

@@ -1,0 +1,310 @@
+/* Navbar container */
+.navbar {
+  background-color: transparent;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  padding: 1.5rem 0;
+  transition: background-color 0.3s ease;
+}
+
+.navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2%;
+  max-width: 1800px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Navigation Sections */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+  height: 100%;
+  width: auto;
+  justify-content: flex-start;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Right-aligned section */
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 1.5rem;
+  padding-right: 2rem;
+}
+
+.nav-item {
+  margin: 0;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 5px;
+}
+
+/* Estilos do Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+  width: auto;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8f9fa;
+  min-width: 200px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1001;
+  border-radius: 8px;
+  padding: 4px 0;
+  font-size: 0.8em;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-item {
+  color: #333;
+  padding: 4px 12px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.15s ease;
+  line-height: 1.2;
+}
+
+.dropdown-item:hover {
+  background-color: #e9ecef;
+}
+
+.dropdown-divider {
+  height: 0.5px;
+  background-color: #e9ecef;
+  margin: 3px 0;
+}
+
+.dropdown-header {
+  padding: 3px 12px 1px;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  margin-top: 2px;
+}
+
+/* Links do lado esquerdo (Mapa e Categorias) */
+.navbar .nav-left .nav-list .nav-item .nav-link {
+  font-size: 18px !important;
+  color: #fff !important; /* Branco na home */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+
+/* Links do lado direito (Sobre e Contato) */
+.navbar .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  padding-right: 3rem;
+}
+
+.navbar .nav-right .nav-list {
+  display: flex;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar .nav-right .nav-item .nav-link {
+  font-size: 18px !important;
+  color: #000 !important; /* Preto na home */
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 8px 12px;
+}
+
+/* Na página Sobre Aracaju, todos os links em preto */
+body.sobre-page .navbar .nav-list .nav-item .nav-link,
+body.sobre-page .navbar .nav-right .nav-item .nav-link {
+  color: #000 !important;
+}
+
+/* Garantindo que o tamanho da fonte se mantenha ao rolar */
+.navbar.scrolled .nav-list .nav-item .nav-link,
+.navbar.scrolled .nav-right .nav-item .nav-link {
+  font-size: 18px !important;
+}
+
+/* Ensure right side links stay black */
+.nav-right .nav-link,
+.navbar.scrolled .nav-right .nav-link {
+  color: #000000;
+}
+
+/* Hover effect for right side links */
+.nav-right .nav-link:hover {
+  color: #4a6cf7;
+}
+
+/* Add separator between right links and search */
+.search-bar {
+  position: relative;
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  height: 40px; /* Altura reduzida para melhor proporção */
+  padding-right: 4px; /* Espaço para o botão */
+}
+
+.search-bar:focus-within {
+  box-shadow: 0 4px 12px rgba(74, 108, 247, 0.15);
+  border-color: #4a6cf7;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  padding: 0 1.25rem;
+  width: 200px;
+  height: 100%;
+  font-size: 0.9rem;
+  color: #1a202c;
+  outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin-right: -8px; /* Ajuste fino para o alinhamento */
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+.search-button {
+  background: #4a6cf7;
+  border: none;
+  color: white;
+  height: 36px; /* Altura fixa para o botão */
+  padding: 0 1.25rem;
+  margin: 2px; /* Margem para o efeito de elevação */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 20px; /* Bordas arredondadas */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.search-button:hover {
+  background: #3a5bd9;
+  transform: scale(1.05);
+}
+
+.search-button:active {
+  transform: scale(0.98);
+}
+
+/* When navbar is scrolled */
+.navbar.scrolled .search-bar {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+
+.navbar.scrolled .search-input {
+  color: #333333;
+}
+
+.navbar.scrolled .search-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .nav-list {
+    gap: 2rem;
+  }
+  
+  .search-input {
+    width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 2rem;
+  }
+  
+  .nav-list {
+    display: none;
+  }
+  
+  .search-bar {
+    margin-left: auto;
+  }
+  
+  /* Add mobile menu button styles here */
+}
