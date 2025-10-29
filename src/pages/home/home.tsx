@@ -20,7 +20,6 @@ export function HomePage() {
         </p>
         <button className="home-button">
           Começar
-          {/* Adicionando uma seta simples com caractere unicode */}
           <span>&#x2794;</span>
         </button>
       </div>
