@@ -5,10 +5,10 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Importe suas páginas
-import { HomePage } from './pages/home/home';
-import { AboutPage } from './pages/sobre/sobre';
-import { MapaPage } from './pages/mapa/mapa';
-import Contato from './pages/contato/contato';
+import { HomePage } from './pages/home/home'; // Corrigido: com chaves
+import SobreAracaju from './pages/SobreAracaju/index.tsx'; // Correto: sem chaves
+import { MapaPage } from './pages/mapa/mapa'; // Corrigido: com chaves
+import Contato from './pages/contato/contato'; // Correto: sem chaves
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "sobre",
-        element: <AboutPage />,
+        element: <SobreAracaju />,
       },
       {
         path: "mapa",
