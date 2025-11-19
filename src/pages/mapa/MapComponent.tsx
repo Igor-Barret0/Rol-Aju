@@ -2,11 +2,9 @@ import { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { type Place } from './PlacesList'; // Importa a interface
+import type { Place } from './PlacesList';
 
 // --- Correção para o ícone padrão do marcador no Leaflet com Webpack ---
-// O Leaflet pode ter problemas para encontrar os ícones padrão quando usado com bundlers como o Webpack.
-// Este trecho de código corrige isso importando os ícones manualmente.
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
@@ -37,13 +35,13 @@ function SelectedPlaceHandler({ place }: { place: Place | null }) {
     return null; // Este componente não renderiza nada
 }
 
+// 1. Simplifique a interface de props
 interface MapComponentProps {
-    places: Place[];
     selectedPlace: Place | null;
-    onPlaceSelect: (place: Place | null) => void;
 }
 
-export function MapComponent({ places, selectedPlace, onPlaceSelect }: MapComponentProps) {
+// 2. Remova as props não utilizadas da função
+export function MapComponent({ selectedPlace }: MapComponentProps) {
   return (
     <MapContainer 
       center={center} 
@@ -55,10 +53,6 @@ export function MapComponent({ places, selectedPlace, onPlaceSelect }: MapCompon
         url={`https://maps.geoapify.com/v1/tile/carto/{z}/{x}/{y}.png?&apiKey=99f6cc892efa49ba999dcfb9ee7cf421`}
       />
 
-      {/* 
-        REMOVIDO O LOOP QUE CRIAVA TODOS OS MARCADORES.
-        Agora, vamos mostrar um marcador APENAS para o local selecionado.
-      */}
       {selectedPlace && (
         <Marker position={[selectedPlace.geometry.coordinates[1], selectedPlace.geometry.coordinates[0]]}>
             <Popup>

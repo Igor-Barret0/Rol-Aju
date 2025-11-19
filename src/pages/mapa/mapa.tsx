@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { MapComponent } from "./MapComponent";
-import { PlacesList } from "./PlacesList"; // <-- ADICIONE ESTA LINHA
+import { PlacesList } from "./PlacesList";
+import { PlaceDetailsCard } from "./PlaceDetailsCard";
 import type { Place, GroupedPlaces } from "./PlacesList";
 import './mapa.css';
 
@@ -19,6 +20,21 @@ export function Mapa() {
     const [allPlaces, setAllPlaces] = useState<Place[]>([]);
     const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
     const [loading, setLoading] = useState(true);
+    const [userLocation, setUserLocation] = useState<[number, number] | null>(null); // 1. Estado para a localização do usuário
+
+    // 2. Efeito para obter a localização do usuário
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setUserLocation([position.coords.latitude, position.coords.longitude]);
+            },
+            (error) => {
+                console.error("Erro ao obter localização do usuário:", error);
+                // Define uma localização padrão (centro de Aracaju) se o usuário negar
+                setUserLocation([-10.9472, -37.0731]);
+            }
+        );
+    }, []);
 
     useEffect(() => {
         const apiKey = '99f6cc892efa49ba999dcfb9ee7cf421';
@@ -40,7 +56,7 @@ export function Mapa() {
                         const placeId = geoData.features[0].properties.place_id;
 
                         // --- ALTERAÇÃO AQUI: Aumentar o limite ---
-                        const placesResponse = await fetch(`https://api.geoapify.com/v2/places?categories=${categories}&filter=place:${placeId}&limit=500&apiKey=${apiKey}`);
+                        const placesResponse = await fetch(`https://api.geoapify.com/v2/places?categories=${categories}&filter=place:${placeId}&limit=500&fields=details,opening_hours&apiKey=${apiKey}`);
                         const placesData = await placesResponse.json();
                         return placesData.features || [];
                     })
@@ -95,13 +111,18 @@ export function Mapa() {
     return (
         <div className="mapa-container">
             <div className="mapa-wrapper">
+                {/* ALTERAÇÃO AQUI: Remova as props 'places' e 'onPlaceSelect' */}
                 <MapComponent 
-                    places={allPlaces} 
                     selectedPlace={selectedPlace}
-                    onPlaceSelect={handlePlaceSelect}
                 />
             </div>
-            {/* CORREÇÃO AQUI: Garanta que o nome é PlacesList e não Placelist */}
+
+            <PlaceDetailsCard 
+                place={selectedPlace} 
+                userLocation={userLocation} // 4. Passe a localização do usuário para o card
+                onClose={() => handlePlaceSelect(null)} 
+            />
+
             <PlacesList 
                 places={places}
                 loading={loading}

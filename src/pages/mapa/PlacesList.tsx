@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import './PlacesList.css';
 
-// As interfaces e o categoryMap agora são importados ou passados pelo pai.
-// Vamos remover a definição daqui para evitar duplicidade.
 export interface Place {
   properties: {
     name: string;
@@ -10,6 +8,10 @@ export interface Place {
     categories: string[];
     lat: number;
     lon: number;
+    details: any; // <-- ADICIONE O PONTO E VÍRGULA AQUI
+    opening_hours: {
+        open_now: boolean;
+    };
   };
   geometry: {
     coordinates: [number, number];
@@ -34,7 +36,6 @@ export function PlacesList({ places, loading, onPlaceSelect }: PlacesListProps) 
     setActiveCategory(activeCategory === category ? null : category);
   };
 
-  // --- NOVA FUNÇÃO PARA NORMALIZAR O TEXTO ---
   const normalizeText = (text: string) => {
     return text
       .toLowerCase()
@@ -47,7 +48,6 @@ export function PlacesList({ places, loading, onPlaceSelect }: PlacesListProps) 
 
   const filteredPlaces = Object.keys(places).reduce((acc, category) => {
     const filtered = places[category].filter((place: Place) =>
-        // --- LÓGICA DE BUSCA ATUALIZADA ---
         normalizeText(place.properties.name).includes(normalizedSearchTerm)
     );
     if (filtered.length > 0) {
@@ -64,7 +64,6 @@ export function PlacesList({ places, loading, onPlaceSelect }: PlacesListProps) 
         <h3>Locais Próximos</h3>
       </div>
       
-      {/* --- BARRA DE PESQUISA ADICIONADA AQUI --- */}
       <div className="places-search-container">
         <input
           type="text"
@@ -74,13 +73,11 @@ export function PlacesList({ places, loading, onPlaceSelect }: PlacesListProps) 
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      {/* --- FIM DA BARRA DE PESQUISA --- */}
-
+      
       <div className="places-list">
         {loading ? (
           <p className="status-message">Carregando locais...</p>
         ) : !hasResults ? (
-          // MENSAGEM QUANDO NÃO HÁ RESULTADOS
           <p className="status-message">Nenhum resultado encontrado.</p>
         ) : (
           Object.keys(filteredPlaces).map(category => (
@@ -90,7 +87,6 @@ export function PlacesList({ places, loading, onPlaceSelect }: PlacesListProps) 
                 <span>{activeCategory === category ? '−' : '+'}</span>
               </button>
               
-              {/* ALTERAÇÃO AQUI: Mostra o conteúdo se a categoria estiver ativa OU se o usuário estiver pesquisando */}
               {(activeCategory === category || searchTerm.length > 0) && (
                 <div className="accordion-content">
                   <ul>

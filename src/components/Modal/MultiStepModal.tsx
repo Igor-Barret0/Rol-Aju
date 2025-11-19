@@ -3,7 +3,6 @@ import { Modal } from './Modal';
 import './MultiStepModal.css';
 
 import iconActivity from '../../assets/rota.png';
-import iconBudget from '../../assets/dolar.png';
 import iconDistance from '../../assets/lado-do-carro.png';
 import iconPreferences from '../../assets/controles-deslizantes-de-configuracoes.png';
 import iconCheck from '../../assets/verificar.png';
@@ -55,10 +54,11 @@ export const clearUserPreferences = (): void => {
 };
 
 export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalProps) {
+  // 1. Reduzir o número de passos para 3
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<UserPreferences>({
     activity: '',
-    budget: '',
+    budget: '', // Manteremos a propriedade, mas não vamos mais perguntar
     distance: '',
     preferences: []
   });
@@ -81,6 +81,8 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
     { id: 'diversao', label: 'Diversão' }
   ];
 
+  // 2. REMOVER a lista de 'budgets'
+  /*
   const budgets = [
     { id: '50', label: 'Até R$ 50' },
     { id: '100', label: 'Até R$ 100' },
@@ -88,29 +90,30 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
     { id: '300', label: 'Até R$ 300' },
     { id: '300+', label: 'Acima de R$ 300' }
   ];
+  */
 
+  // 3. Manter a lista de 'distances'
   const distances = [
-    { id: '<1', label: 'Menos de 1 quilometros' },
-    { id: '1-5', label: 'Entre 1 e 5 quilometros' },
-    { id: '5+', label: 'Mais de 5 quilometros' }
+    { id: '<1', label: 'Menos de 1 quilômetro' },
+    { id: '1-5', label: 'Entre 1 e 5 quilômetros' },
+    { id: '5+', label: 'Mais de 5 quilômetros' }
   ];
 
+  // 4. SIMPLIFICAR a lista de 'preferenceOptions' para apenas o que podemos usar
   const preferenceOptions = [
-    { id: 'pet-friendly', label: 'Pet Friendly' },
-    { id: 'calmo', label: 'Ambiente Calmo' },
-    { id: 'climatizado', label: 'Climatizado' },
-    { id: 'ar-livre', label: 'Ao Ar Livre' },
-    { id: 'familiar', label: 'Familiar' },
-    { id: 'acessivel', label: 'Acessível' }
+    { id: 'acessivel', label: 'Acessível (para cadeirantes)' }
   ];
 
   const handleActivitySelect = (activity: string) => {
     setFormData({ ...formData, activity });
   };
 
+  // 5. REMOVER a função handleBudgetSelect
+  /*
   const handleBudgetSelect = (budget: string) => {
     setFormData({ ...formData, budget });
   };
+  */
 
   const handleDistanceSelect = (distance: string) => {
     setFormData({ ...formData, distance });
@@ -124,18 +127,15 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
   };
 
   const handleNext = () => {
-    if (currentStep < 4) {
+    // 6. Ajustar a lógica de navegação para 3 passos
+    if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     }
   };
 
   const handleComplete = () => {
-    // Salva as preferências
     saveUserPreferences(formData);
-    
-    // Chama o callback com os dados
     onComplete(formData);
-    
     handleClose();
   };
 
@@ -157,37 +157,32 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
   };
 
   const canAdvance = () => {
+    // 7. Ajustar a validação para 3 passos
     switch(currentStep) {
       case 1: return formData.activity !== '';
-      case 2: return formData.budget !== '';
-      case 3: return formData.distance !== '';
-      case 4: return true; // Preferências são opcionais
+      case 2: return formData.distance !== '';
+      case 3: return true; // Preferências são opcionais
       default: return false;
     }
   };
 
   const getStepIcon = (step: number) => {
-    // Se o passo está completo, retorna o check
-    if (step < currentStep) {
-      return iconCheck;
-    }
-    
-    // Retorna o ícone específico de cada passo
+    if (step < currentStep) return iconCheck;
+    // 8. Ajustar os ícones para 3 passos
     switch(step) {
       case 1: return iconActivity;
-      case 2: return iconBudget;
-      case 3: return iconDistance;
-      case 4: return iconPreferences;
+      case 2: return iconDistance;
+      case 3: return iconPreferences;
       default: return iconActivity;
     }
   };
 
   const getStepLabel = (step: number) => {
+    // 9. Ajustar os labels para 3 passos
     switch(step) {
-      case 1: return 'O que você quer fazer agora ?';
-      case 2: return 'Quanto você pretende gastar ?';
-      case 3: return 'Qual a distância máxima ?';
-      case 4: return 'Preferências';
+      case 1: return 'O que você quer fazer?';
+      case 2: return 'Qual a distância máxima?';
+      case 3: return 'Preferências';
       default: return '';
     }
   };
@@ -195,12 +190,11 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
       <div className="multi-step-modal">
-        {/* Left Side - Steps Progress */}
         <div className="steps-sidebar">
-          <h2 className="modal-title">Qual experiência você deseja ter hoje?</h2>
-          
+          <h2 className="modal-title">Encontre seu rolê ideal</h2>
           <div className="steps-list">
-            {[1, 2, 3, 4].map((step) => (
+            {/* 10. Mapear para 3 passos */}
+            {[1, 2, 3].map((step) => (
               <div key={step} className="step-item-wrapper">
                 <div className={`step-item ${currentStep === step ? 'active' : ''} ${currentStep > step ? 'completed' : ''}`}>
                   <div className="step-icon">
@@ -208,22 +202,20 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
                   </div>
                   <span className="step-label">{getStepLabel(step)}</span>
                 </div>
-                {step < 4 && <div className="step-connector"></div>}
+                {step < 3 && <div className="step-connector"></div>}
               </div>
             ))}
           </div>
         </div>
 
-        {/* Right Side - Step Content */}
         <div className="step-content-area">
           <h3 className="step-title">
-            {currentStep === 1 && 'Escolha a atividade de sua preferência:'}
-            {currentStep === 2 && 'Escolha seu orçamento:'}
-            {currentStep === 3 && 'Escolha a distância de sua preferência:'}
-            {currentStep === 4 && 'Escolha suas preferências:'}
+            {currentStep === 1 && 'Escolha a atividade:'}
+            {currentStep === 2 && 'Escolha a distância:'}
+            {currentStep === 3 && 'Escolha suas preferências (opcional):'}
           </h3>
 
-          {/* Step 1: Activity */}
+          {/* Step 1: Activity (sem alterações) */}
           {currentStep === 1 && (
             <>
               <div className="options-container">
@@ -253,40 +245,8 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
             </>
           )}
 
-          {/* Step 2: Budget */}
+          {/* Step 2: Distance (era o passo 3) */}
           {currentStep === 2 && (
-            <>
-              <div className="options-container">
-                {budgets.map((budget) => (
-                  <label key={budget.id} className="radio-option">
-                    <input
-                      type="radio"
-                      name="budget"
-                      value={budget.id}
-                      checked={formData.budget === budget.id}
-                      onChange={() => handleBudgetSelect(budget.id)}
-                    />
-                    <span className="radio-label">{budget.label}</span>
-                  </label>
-                ))}
-              </div>
-              <div className="step-actions">
-                <button className="btn-back-circle" onClick={handleBack}>
-                  ←
-                </button>
-                <button 
-                  className="btn-advance" 
-                  onClick={handleNext}
-                  disabled={!canAdvance()}
-                >
-                  Avançar
-                </button>
-              </div>
-            </>
-          )}
-
-          {/* Step 3: Distance */}
-          {currentStep === 3 && (
             <>
               <div className="options-container">
                 {distances.map((distance) => (
@@ -317,8 +277,8 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
             </>
           )}
 
-          {/* Step 4: Preferences */}
-          {currentStep === 4 && (
+          {/* Step 3: Preferences (era o passo 4) */}
+          {currentStep === 3 && (
             <>
               <div className="options-container">
                 {preferenceOptions.map((pref) => (
@@ -337,7 +297,7 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
                   ←
                 </button>
                 <button className="btn-advance" onClick={handleComplete}>
-                  Finalizar
+                  Encontrar Locais
                 </button>
               </div>
             </>
