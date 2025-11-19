@@ -1,8 +1,18 @@
 import { useState, useEffect } from "react";
 import { MapComponent } from "./MapComponent";
-import { PlacesList, categoryMap } from "./PlacesList";
-import type { Place, GroupedPlaces } from "./PlacesList"; // <-- ALTERAÇÃO AQUI
+import { PlacesList } from "./PlacesList"; // <-- ADICIONE ESTA LINHA
+import type { Place, GroupedPlaces } from "./PlacesList";
 import './mapa.css';
+
+// Vamos mover o categoryMap para cá, pois é o componente que faz a busca
+const categoryMap: { [key: string]: string } = {
+  'catering.restaurant': 'Restaurantes',
+  'catering.fast_food': 'Fast Food', // <-- CATEGORIA ADICIONADA
+  'catering.bar': 'Bares',
+  'leisure.park': 'Parques',
+  'entertainment': 'Entretenimento',
+  'commercial.shopping_mall': 'Shoppings',
+};
 
 export function Mapa() {
     const [places, setPlaces] = useState<GroupedPlaces>({});
@@ -17,7 +27,6 @@ export function Mapa() {
 
         const fetchAllPlaces = async () => {
             try {
-                // Executa as buscas para todas as cidades em paralelo
                 const allCityPlacesData = await Promise.all(
                     cityNames.map(async (cityName) => {
                         // Etapa 1: Obter o place_id da cidade
@@ -30,15 +39,18 @@ export function Mapa() {
                         }
                         const placeId = geoData.features[0].properties.place_id;
 
-                        // Etapa 2: Usar o place_id para buscar locais
-                        const placesResponse = await fetch(`https://api.geoapify.com/v2/places?categories=${categories}&filter=place:${placeId}&limit=100&apiKey=${apiKey}`);
+                        // --- ALTERAÇÃO AQUI: Aumentar o limite ---
+                        const placesResponse = await fetch(`https://api.geoapify.com/v2/places?categories=${categories}&filter=place:${placeId}&limit=500&apiKey=${apiKey}`);
                         const placesData = await placesResponse.json();
                         return placesData.features || [];
                     })
                 );
 
-                // Junta os resultados de todas as cidades em uma única lista
                 const combinedPlaces = allCityPlacesData.flat();
+
+                // --- DEBUG: Adicione este console.log para ver todos os nomes ---
+                console.log("Locais recebidos da API:", combinedPlaces.map(p => p.properties.name));
+                // --- FIM DO DEBUG ---
 
                 // Processa a lista combinada para agrupar e exibir
                 const grouped: GroupedPlaces = {};
@@ -89,6 +101,7 @@ export function Mapa() {
                     onPlaceSelect={handlePlaceSelect}
                 />
             </div>
+            {/* CORREÇÃO AQUI: Garanta que o nome é PlacesList e não Placelist */}
             <PlacesList 
                 places={places}
                 loading={loading}

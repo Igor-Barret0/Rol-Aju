@@ -28,6 +28,29 @@
   color: #333;
 }
 
+/* --- ESTILOS ADICIONADOS PARA A BUSCA --- */
+.places-search-container {
+  padding: 8px 16px;
+  border-bottom: 1px solid #eee;
+  background-color: #f7f7f7;
+}
+
+.places-search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box; /* Garante que o padding não quebre o layout */
+}
+
+.places-search-input:focus {
+  outline: none;
+  border-color: #888;
+}
+/* --- FIM DOS ESTILOS ADICIONADOS --- */
+
 .places-list {
   flex-grow: 1;
   overflow-y: auto; /* Adiciona scroll se o conteúdo for maior que a altura */
@@ -97,4 +120,11 @@
   font-size: 12px;
   color: #777;
   margin: 4px 0 0;
+}
+
+/* Adicione este novo estilo no final do arquivo */
+.status-message {
+  padding: 20px;
+  text-align: center;
+  color: #888;
 }

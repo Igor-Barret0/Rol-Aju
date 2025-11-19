@@ -55,28 +55,17 @@ export function MapComponent({ places, selectedPlace, onPlaceSelect }: MapCompon
         url={`https://maps.geoapify.com/v1/tile/carto/{z}/{x}/{y}.png?&apiKey=99f6cc892efa49ba999dcfb9ee7cf421`}
       />
 
-      {/* Adiciona marcadores para todos os locais */}
-      {places.map((place, index) => {
-        const [lon, lat] = place.geometry.coordinates;
-        return (
-            <Marker 
-                key={index} 
-                position={[lat, lon]}
-                eventHandlers={{
-                    click: () => {
-                        onPlaceSelect(place);
-                    },
-                }}
-            />
-        );
-      })}
-
-      {/* Mostra um Popup no local selecionado */}
+      {/* 
+        REMOVIDO O LOOP QUE CRIAVA TODOS OS MARCADORES.
+        Agora, vamos mostrar um marcador APENAS para o local selecionado.
+      */}
       {selectedPlace && (
-        <Popup position={[selectedPlace.geometry.coordinates[1], selectedPlace.geometry.coordinates[0]]}>
-            <strong>{selectedPlace.properties.name}</strong>
-            <p>{selectedPlace.properties.address_line2}</p>
-        </Popup>
+        <Marker position={[selectedPlace.geometry.coordinates[1], selectedPlace.geometry.coordinates[0]]}>
+            <Popup>
+                <strong>{selectedPlace.properties.name}</strong>
+                <p>{selectedPlace.properties.address_line2}</p>
+            </Popup>
+        </Marker>
       )}
 
       <SelectedPlaceHandler place={selectedPlace} />
