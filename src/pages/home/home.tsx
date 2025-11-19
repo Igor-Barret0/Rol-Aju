@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Importe o hook de navegação
 import './home.css';
 import imagemPrincipal from '../../assets/imagem-aracaju-home.jpg';
 import { MultiStepModal, type UserPreferences } from '../../components/Modal/MultiStepModal';
 
 export function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate(); // 2. Inicialize o hook
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -15,9 +17,9 @@ export function HomePage() {
   };
 
   const handleComplete = (data: UserPreferences) => {
-    console.log('Preferências do usuário:', data);
-    // Aqui você pode navegar para a página de resultados ou processar os dados
-    // Por exemplo: navigate('/results', { state: data });
+    console.log('Enviando para o mapa as preferências:', data);
+    // 3. AÇÃO: Navegue para a página do mapa, passando os dados no 'state'
+    navigate('/mapa', { state: { preferences: data } });
   };
 
   return (

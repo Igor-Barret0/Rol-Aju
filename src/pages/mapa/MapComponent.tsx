@@ -38,10 +38,20 @@ function SelectedPlaceHandler({ place }: { place: Place | null }) {
 // 1. Simplifique a interface de props
 interface MapComponentProps {
     selectedPlace: Place | null;
+    userLocation: [number, number] | null; // 1. Adicione a prop userLocation
 }
 
-// 2. Remova as props não utilizadas da função
-export function MapComponent({ selectedPlace }: MapComponentProps) {
+// 2. Crie um ícone azul para o usuário
+const userIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+export function MapComponent({ selectedPlace, userLocation }: MapComponentProps) { // 3. Receba a prop
   return (
     <MapContainer 
       center={center} 
@@ -53,11 +63,21 @@ export function MapComponent({ selectedPlace }: MapComponentProps) {
         url={`https://maps.geoapify.com/v1/tile/carto/{z}/{x}/{y}.png?&apiKey=99f6cc892efa49ba999dcfb9ee7cf421`}
       />
 
+      {/* Marcador para o local selecionado (vermelho) */}
       {selectedPlace && (
         <Marker position={[selectedPlace.geometry.coordinates[1], selectedPlace.geometry.coordinates[0]]}>
             <Popup>
                 <strong>{selectedPlace.properties.name}</strong>
                 <p>{selectedPlace.properties.address_line2}</p>
+            </Popup>
+        </Marker>
+      )}
+
+      {/* 4. Marcador para a localização do usuário (azul) */}
+      {userLocation && (
+        <Marker position={userLocation} icon={userIcon}>
+            <Popup>
+                Você está aqui (ou este é o ponto de partida padrão).
             </Popup>
         </Marker>
       )}

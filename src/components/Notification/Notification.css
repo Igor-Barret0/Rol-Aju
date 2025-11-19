@@ -1,0 +1,33 @@
+.notification {
+    position: fixed;
+    top: 80px; /* Abaixo do seu header */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    z-index: 2000; /* Acima de tudo */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: fadeInDown 0.5s ease-out;
+}
+
+.notification.info {
+    background-color: #17a2b8;
+}
+
+.notification.error {
+    background-color: #dc3545;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        top: 60px;
+    }
+    to {
+        opacity: 1;
+        top: 80px;
+    }
+}
