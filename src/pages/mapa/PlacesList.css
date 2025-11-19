@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+.places-card {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px; /* Largura do card */
+  height: 450px; /* Altura do card */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000; /* Garante que fique acima do mapa */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.places-card-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  background-color: #f7f7f7;
+}
+
+.places-card-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.places-list {
+  flex-grow: 1;
+  overflow-y: auto; /* Adiciona scroll se o conteúdo for maior que a altura */
+}
+
+.accordion-item {
+  border-bottom: 1px solid #eee;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #fff;
+  border: none;
+  text-align: left;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #555;
+}
+
+.accordion-header:hover {
+  background-color: #f9f9f9;
+}
+
+.accordion-header span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.accordion-content {
+  padding: 0 16px 16px 16px;
+  background-color: #fafafa;
+}
+
+.accordion-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.accordion-content li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer; /* Adicione esta linha */
+  transition: background-color 0.2s; /* Adicione para uma transição suave */
+}
+
+/* Adicione este novo seletor para o efeito hover */
+.accordion-content li:hover {
+  background-color: #f5f5f5;
+}
+
+.accordion-content li:last-child {
+  border-bottom: none;
+}
+
+.accordion-content li strong {
+  font-size: 14px;
+  color: #333;
+}
+
+.accordion-content li p {
+  font-size: 12px;
+  color: #777;
+  margin: 4px 0 0;
+}

@@ -1,0 +1,5 @@
+.mapPageContainer {
+    width: 100%;
+    height: calc(100vh - 60px); /* Ajuste 60px para a altura do seu header */
+    position: relative;
+}

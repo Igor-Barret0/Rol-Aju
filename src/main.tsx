@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // Importe suas páginas
 import { HomePage } from './pages/home/home'; // Corrigido: com chaves
 import SobreAracaju from './pages/SobreAracaju/index.tsx'; // Correto: sem chaves
-import { MapaPage } from './pages/mapa/mapa'; // Corrigido: com chaves
+import { Mapa } from './pages/mapa/mapa'; // Corrigido: com chaves
 import Contato from './pages/contato/contato'; // Correto: sem chaves
 
 const router = createBrowserRouter([
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "mapa",
-        element: <MapaPage />,
+        element: <Mapa />,
       },
       {
         path: "contato",
