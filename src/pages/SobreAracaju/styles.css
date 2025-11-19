@@ -1,158 +1,163 @@
-/* Estilos para a página Sobre Aracaju */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
 
+/* Estilos gerais para a página Sobre Aracaju */
 .sobre-aracaju-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 4rem 2rem;
+  font-family: 'Poppins', sans-serif;
   color: #333;
-  line-height: 1.6;
 }
 
+/* Cabeçalho */
 .sobre-aracaju-header {
   text-align: center;
-  margin-bottom: 3rem;
-  padding: 2rem 0;
-  background: linear-gradient(135deg, #4a6cf7 0%, #6c5ce7 100%);
-  color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5rem;
 }
 
 .sobre-aracaju-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
 }
 
 .sobre-aracaju-header p {
-  font-size: 1.2rem;
-  opacity: 0.9;
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.historia-section {
-  margin-bottom: 4rem;
-}
-
+/* Títulos das Seções */
 .historia-section h2,
 .curiosidades-section h2 {
-  color: #2d3748;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 3px solid #4a6cf7;
-  display: inline-block;
+  border-bottom: 2px solid #eee;
+}
+
+/* Seção de História */
+.historia-section {
+  margin-bottom: 5rem;
 }
 
 .historia-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Reativando as duas colunas */
+  gap: 3rem;
   align-items: center;
-  margin-top: 2rem;
-}
-
-.historia-texto {
-  flex: 1;
-  min-width: 300px;
 }
 
 .historia-texto p {
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.8;
-  color: #4a5568;
+  margin-bottom: 1.5rem;
+  color: #444;
 }
 
-.historia-imagem {
-  flex: 1;
-  min-width: 300px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.historia-imagem:hover {
-  transform: translateY(-5px);
+.historia-texto p:last-child {
+  margin-bottom: 0;
 }
 
 .historia-imagem img {
   width: 100%;
   height: auto;
-  display: block;
-  transition: transform 0.5s ease;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.historia-imagem:hover img {
+.historia-imagem img:hover {
   transform: scale(1.03);
+}
+
+/* Estilos para o Carrossel */
+.historia-carousel {
+  width: 100%;
+  overflow: hidden; /* Garante que nada vaze */
+}
+
+.historia-carousel img {
+  width: 100%;
+  height: 400px; /* Defina uma altura fixa para as imagens */
+  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustes nos pontos do carrossel */
+.slick-dots li button:before {
+  font-size: 12px;
+  color: #1a1a1a;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #1a1a1a;
+  opacity: 1;
+}
+
+/* Seção de Curiosidades */
+.curiosidades-section {
+  margin-bottom: 4rem;
 }
 
 .curiosidades-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+  gap: 2rem;
 }
 
 .curiosidade-card {
-  background: white;
-  border-radius: 10px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .curiosidade-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  border-color: #4a6cf7;
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
 }
 
 .curiosidade-card h3 {
-  color: #2d3748;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
   margin-bottom: 0.75rem;
-  font-size: 1.25rem;
-  color: #4a6cf7;
 }
 
 .curiosidade-card p {
-  color: #4a5568;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #555;
+  margin: 0;
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
-  .sobre-aracaju-header h1 {
-    font-size: 2rem;
-  }
-  
+@media (max-width: 900px) {
   .historia-content {
-    flex-direction: column;
-  }
-  
-  .historia-texto,
-  .historia-imagem {
-    width: 100%;
-  }
-  
-  .curiosidades-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* Animações */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@media (max-width: 768px) {
+  .sobre-aracaju-container {
+    padding: 3rem 1.5rem;
+  }
 
-.historia-section,
-.curiosidades-section {
-  opacity: 0;
-  animation: fadeIn 0.6s ease-out forwards;
-}
+  .sobre-aracaju-header h1 {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
 
-.curiosidades-section {
-  animation-delay: 0.3s;
+  .historia-section h2,
+  .curiosidades-section h2 {
+    font-size: 2rem;
+  }
 }

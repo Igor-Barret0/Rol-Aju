@@ -197,7 +197,7 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
       <div className="multi-step-modal">
         {/* Left Side - Steps Progress */}
         <div className="steps-sidebar">
-          {/* <h2 className="modal-title">Rol-Aju</h2> */}
+          <h2 className="modal-title">Qual experiência você deseja ter hoje?</h2>
           
           <div className="steps-list">
             {[1, 2, 3, 4].map((step) => (
