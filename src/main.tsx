@@ -9,6 +9,7 @@ import { HomePage } from './pages/home/home'; // Corrigido: com chaves
 import SobreAracaju from './pages/SobreAracaju/index.tsx'; // Correto: sem chaves
 import { Mapa } from './pages/mapa/mapa'; // Corrigido: com chaves
 import Contato from './pages/contato/contato'; // Correto: sem chaves
+import { SearchResults } from './pages/search/SearchResults';
 
 const router = createBrowserRouter([
   {
@@ -28,8 +29,12 @@ const router = createBrowserRouter([
         element: <Mapa />,
       },
       {
-        path: "contato",
+        path: "/contato",
         element: <Contato />,
+      },
+      {
+        path: "/search",
+        element: <SearchResults />,
       },
     ],
   },

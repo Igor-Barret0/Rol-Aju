@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom'; // 1. Importe useLocation
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { FiMapPin, FiList, FiPhone, FiInfo, FiSearch, FiChevronDown } from 'react-icons/fi';
 import logoImage from '../../assets/transparent-logo.png';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation(); // 2. Obtenha a localização atual
-  const isHomePage = location.pathname === '/'; // 3. Verifique se é a página inicial
+  const [searchQuery, setSearchQuery] = useState('');
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,9 +31,15 @@ const Navbar = () => {
     };
   }, [scrolled, isHomePage]);
 
-  // 4. Adicione a classe 'navbar-internal' se não for a home
-  //    E a classe 'scrolled' só se aplica na home
   const navClassName = `navbar ${!isHomePage ? 'navbar-internal' : ''} ${isHomePage && scrolled ? 'scrolled' : ''}`;
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+    }
+  };
 
   return (
     <nav className={navClassName}>
@@ -87,12 +95,18 @@ const Navbar = () => {
           </ul>
         </div>
         
-        <div className="search-bar">
-          <input type="text" placeholder="" className="search-input" />
-          <button className="search-button">
+        <form onSubmit={handleSearch} className="search-bar">
+          <input 
+            type="text" 
+            placeholder="Buscar lugares..." 
+            className="search-input" 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="submit" className="search-button" aria-label="Buscar">
             <FiSearch />
           </button>
-        </div>
+        </form>
       </div>
     </nav>
   );
