@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom"; // 1. Importe para ler os dados da rota
-import L from 'leaflet';
 import { MapComponent } from "./MapComponent";
 import { PlacesList } from "./PlacesList";
 import { PlaceDetailsCard } from "./PlaceDetailsCard";
