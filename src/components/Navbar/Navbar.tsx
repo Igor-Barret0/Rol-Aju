@@ -56,13 +56,14 @@ const Navbar = () => {
                     <Link to="/mapa/restaurantes-e-bares" className="dropdown-item">Restaurantes e Bares</Link>
                     <Link to="/mapa/praias-e-natureza" className="dropdown-item">Praias e Natureza</Link>
                     <Link to="/mapa/hospedagem" className="dropdown-item">Hospedagem</Link>
-                    <Link to="/mapa/cultura-e-historia" className="dropdown-item">Cultura e História</Link>
+                    
                   </div>
                   <div className="dropdown-column">
+                    <Link to="/mapa/cultura-e-historia" className="dropdown-item">Cultura e História</Link>
                     <Link to="/mapa/lazer-e-entretenimento" className="dropdown-item">Lazer e Entretenimento</Link>
                     <Link to="/mapa/compras-e-artesanato" className="dropdown-item">Compras e Artesanato</Link>
-                    <Link to="/mapa/eventos-e-festas" className="dropdown-item">Eventos e Festas</Link>
-                    <Link to="/mapa/transportes-e-mobilidade" className="dropdown-item">Transportes e Mobilidade</Link>
+                    {/*<Link to="/mapa/eventos-e-festas" className="dropdown-item">Eventos e Festas</Link>
+                    <Link to="/mapa/transportes-e-mobilidade" className="dropdown-item">Transportes e Mobilidade</Link>*/}
                     <Link to="/mapa" className="dropdown-item bold-item">Ver Tudo</Link>
                   </div>
                 </div>
@@ -87,12 +88,13 @@ const Navbar = () => {
           </ul>
         </div>
         
+        {/*
         <div className="search-bar">
           <input type="text" placeholder="" className="search-input" />
           <button className="search-button">
             <FiSearch />
           </button>
-        </div>
+        </div>*/}
       </div>
     </nav>
   );
