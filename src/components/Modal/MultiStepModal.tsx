@@ -74,7 +74,7 @@ export function MultiStepModal({ isOpen, onClose, onComplete }: MultiStepModalPr
   }, [isOpen]);
 
   const activities = [
-    { id: 'praia', label: 'Ir à Praia' },
+    //{ id: 'praia', label: 'Ir à Praia' },
     { id: 'restaurante', label: 'Comer' },
     { id: 'passeio', label: 'Passear' },
     { id: 'cultura', label: 'Cultura' },
