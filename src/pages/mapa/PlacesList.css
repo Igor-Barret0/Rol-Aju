@@ -53,7 +53,7 @@
 
 .places-list {
   flex-grow: 1;
-  overflow-y: auto; /* Adiciona scroll se o conteúdo for maior que a altura */
+  overflow-y: auto;
 }
 
 .accordion-item {
@@ -73,6 +73,7 @@
   justify-content: space-between;
   align-items: center;
   color: #555;
+  font-family: inherit; /* Adicione esta linha para herdar a fonte Poppins */
 }
 
 .accordion-header:hover {
