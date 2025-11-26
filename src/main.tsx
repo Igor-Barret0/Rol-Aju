@@ -28,6 +28,10 @@ const router = createBrowserRouter([
         element: <Mapa />,
       },
       {
+        path: "mapa/:categorySlug?",
+        element: <Mapa />,
+      },
+      {
         path: "contato",
         element: <Contato />,
       },
